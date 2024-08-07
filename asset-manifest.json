@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/gestion/static/css/main.106aff02.css",
+    "main.js": "/gestion/static/js/main.338b7afa.js",
+    "static/js/453.6f87fe01.chunk.js": "/gestion/static/js/453.6f87fe01.chunk.js",
+    "static/media/malimLogoBlanco.png": "/gestion/static/media/malimLogoBlanco.7f4ab169cd74d20d4246.png",
+    "index.html": "/gestion/index.html",
+    "main.106aff02.css.map": "/gestion/static/css/main.106aff02.css.map",
+    "main.338b7afa.js.map": "/gestion/static/js/main.338b7afa.js.map",
+    "453.6f87fe01.chunk.js.map": "/gestion/static/js/453.6f87fe01.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.106aff02.css",
+    "static/js/main.338b7afa.js"
+  ]
+}
