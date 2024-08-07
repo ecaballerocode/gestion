@@ -1,0 +1,60 @@
+.pedido-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100vw;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding-left: 1rem;
+    padding-right: 1rem;
+    box-sizing: border-box; /* Asegura que el padding y el borde se incluyan en el ancho del contenedor */
+   
+  }
+  
+  .pedido-form label {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+  }
+  
+  .pedido-form input,
+  .pedido-form select {
+    margin-top: 0.5rem;
+    margin-right: 2;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box; 
+    width: 100%;
+    box-sizing: border-box; 
+  }
+  
+  .pedido-form button {
+    bottom: 20px;
+    align-self: center; /* Centra el botón horizontalmente */
+    left: 50%;
+    width: 200px;
+    height: 40px;
+    background-color: #fcbf49;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    text-align: center;
+    line-height: 40px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.3s, box-shadow 0.3s;
+  }
+  
+  .pedido-form button:hover {
+    background-color: #45a049;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  }

@@ -1,0 +1,104 @@
+.compras-group {
+    margin-bottom: 2rem;
+  }
+  
+  .proveedor-separator {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fcbf49; /* Color gris */
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    height: 7vh;
+  }
+  
+  .compras-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .compra-item {
+    padding: 1rem;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    background-color: #fcfeff; /* Bright Coral */
+    color: #1B3A4B; /* Pale Yellow */
+    font-weight: normal;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+  
+  .compra-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .compra-row {
+    display: flex;
+    justify-content:space-between;
+  }
+  
+  .compra-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.5rem; /* Espacio entre botones */
+  }
+  
+  
+  .compra-row-left{
+    display: flex;
+    justify-content:space-between;
+    gap: 1rem; /* Espacio entre los datos en la fila */
+  }
+
+  .compra-row p{
+    margin: 0;
+    font-size: 0.9rem;
+    align-self: flex-start;
+  }
+
+  .compra-row-left p{
+    margin: 0;
+    font-size: 0.9rem;
+  }
+
+
+  .comprado-button, .cancel-button {
+    padding: 0.25rem 0.5rem; /* Reduce el padding vertical y horizontal */
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-weight: normal;
+    font-size: 10px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    width: 10vh;
+    height: 4vh;
+    font-size: 10px;
+  }
+  
+  .comprado-button {
+    background-color: #fcbf49; /* Verde */
+  }
+  
+  .comprado-button:hover {
+    background-color: #f77f00;
+  }
+  
+  .cancel-button {
+    background-color: #dc3545; /* Rojo */
+  }
+  
+  .cancel-button:hover {
+    background-color: #c82333;
+  }
+  .total-costo-proveedor{
+    color: #fcfeff;
+    font-weight: bold;
+  }
+  

@@ -1,0 +1,72 @@
+/* PorCobrar.css */
+
+.porcobrar-group {
+    margin-bottom: 2rem;
+  }
+  
+  .cliente-separator {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fcbf49; /* Color gris */
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    height: 7vh;
+  }
+  
+  .porcobrar-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .porcobrar-item {
+    padding: 1rem;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    background-color: #fcfeff; /* Bright Coral */
+    color: #1B3A4B; /* Pale Yellow */
+    font-weight: normal;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+  
+  .pedido-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .pedido-row {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .pedido-row p {
+    margin: 0;
+    font-size: 0.9rem;
+    align-self: flex-start;
+  }
+  
+  .action-button {
+    padding: 0.25rem 0.5rem; /* Reduce el padding vertical y horizontal */
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-weight: normal;
+    font-size: 10px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    width: 10vh; /* Permite que el ancho del botón sea automático */
+    height: 4vh; /* Permite que la altura del botón sea automática */
+    background-color: #fcbf49; /* Verde */
+  }
+  
+  .action-button:hover {
+    background-color: #f77f00;
+  }
+.pedido-butt{
+    text-decoration: none;
+}  

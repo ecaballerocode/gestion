@@ -1,0 +1,141 @@
+.home-container {
+    text-align: center;
+    padding: 20px;
+    background-color: #fcbf49; /* Soft Lavender */
+    color: #1B3A4B; /* Dark Blue */
+    text-align: center;
+    margin-top: 0; /* Eliminar margen superior */
+    position: relative; /* Establecer posición relativa para el contenedor */
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+  }
+  
+  button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+    border: none;
+    border-radius: 5px;
+    background-color: #fcfeff; /* Bright Coral */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    color: #1B3A4B; /* Pale Yellow */
+    text-decoration: none; /* Eliminar subrayado en el botón *
+  }
+  
+  button:hover {
+    background-color: #98FF98; /* Light Mint */
+    transform: translateY(-2px);
+  }
+  
+  button span {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #1B3A4B; /* Dark Blue */
+  }
+  
+  button svg {
+    font-size: 24px;
+    color: #FFFACD; /* Pale Yellow */
+  }
+  
+  button img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover; /* Ajusta el tamaño de la imagen */
+  }
+  
+  .image-half-screen {
+    width: 50vw; /* Ocupa el 50% del ancho de la pantalla */
+    height: auto; /* Mantiene la proporción de la imagen */
+    border: 2px solid #FF6F61; /* Bright Coral */
+    border-radius: 10px;
+  }
+  
+  h1, p {
+    color: #1B3A4B; /* Dark Blue */
+    margin-top: 40px;
+  }
+
+.logo{
+    width: 30vw;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    position: absolute; /* Posicionar absolutamente */
+    top: -20px; /* Ajusta según sea necesario para salir del contenedor */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px; /* Ajusta el tamaño de la imagen */
+    z-index: 10; /* Asegúrate de que esté por encima de otros elementos */
+    margin-bottom: 100px;
+}
+body{
+  background-color: #B2DFDB;
+}
+
+.text-button{
+  text-decoration: none;
+}
+
+.footer {
+  margin-top: 0px;
+  padding: 0;
+  background-color: #fcbf49; /* Dark Blue */
+  color: #1B3A4B; /* Pale Yellow */
+  text-align: center;
+  
+}
+
+.footer h2 {
+  margin-bottom: 20px;
+  color: #FFD43B; /* Golden Yellow */
+}
+
+.footer-menu {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.footer-menu .no-underline {
+  text-decoration: none;
+  color: inherit;
+}
+
+.footer-menu button {
+  padding: 0px 0px; /* Reduce el padding para hacer los botones más pequeños */
+  font-size: 10px; /* Reduce el tamaño de fuente */
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #fcbf49; /* Bright Coral */
+  color: #1B3A4B; /* Pale Yellow */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  width: 20vw;
+  height: 20vw;
+  font-size: smaller;
+  box-shadow: none;
+}
+
+.footer-menu button:hover {
+  background-color: #98FF98; /* Light Mint */
+  transform: translateY(-2px);
+}
+
+.span-button{
+  font-size: 10px;
+}
