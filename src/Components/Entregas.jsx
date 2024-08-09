@@ -2,9 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { collection, getDocs, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase/config';
 import './Entregas.css';
+import { useNavigate } from 'react-router-dom';
+import { faHouse} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Entregas = () => {
   const [pedidos, setPedidos] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPedidos = async () => {
@@ -52,7 +56,14 @@ const Entregas = () => {
 
   return (
     <div>
-      <h2>Entregas</h2>
+      <div className='header'>
+      <button onClick={() => navigate('/')} className="home-button">
+          <FontAwesomeIcon icon={faHouse} style={{color: "#fcbf49"}}/>
+        </button>
+        <h2>Entregas</h2>
+      
+      </div>
+      
       {Object.keys(pedidos).map(lugar => (
         <div key={lugar} className="entregas-group">
           <div className="lugar-separator">

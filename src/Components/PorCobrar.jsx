@@ -3,9 +3,13 @@ import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase/config';
 import { Link } from 'react-router-dom';
 import './PorCobrar.css';
+import { useNavigate } from 'react-router-dom';
+import { faHouse} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const PorCobrar = () => {
   const [pedidos, setPedidos] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchPedidos();
@@ -39,7 +43,14 @@ const PorCobrar = () => {
 
   return (
     <div>
-      <h2>Por Cobrar</h2>
+      <div className='header'>
+      <button onClick={() => navigate('/')} className="home-button">
+          <FontAwesomeIcon icon={faHouse} style={{color: "#fcbf49"}}/>
+        </button>
+        <h2>Por Cobrar</h2>
+      
+      </div>
+      
       {Object.keys(pedidos).map(cliente => (
         <div key={cliente} className="porcobrar-group">
           <div className="cliente-separator">

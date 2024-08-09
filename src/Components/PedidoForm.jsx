@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { collection, addDoc, getDocs } from 'firebase/firestore';
-import { db } from '../firebase/config'; // Asegúrate de que la ruta sea correcta
+import { db } from '../firebase/config';
 import { useNavigate } from 'react-router-dom';
+import Select from 'react-select';
 import './PedidoForm.css';
 
 const PedidoForm = () => {
   const [fecha, setFecha] = useState(new Date().toISOString().slice(0, 16));
-  const [cliente, setCliente] = useState('');
+  const [cliente, setCliente] = useState(null);
   const [prenda, setPrenda] = useState('');
   const [talla, setTalla] = useState('');
   const [color, setColor] = useState('');
-  const [proveedor, setProveedor] = useState('');
+  const [proveedor, setProveedor] = useState(null);
   const [costoProveedor, setCostoProveedor] = useState('');
   const [precioPublico, setPrecioPublico] = useState('');
   const [descuento, setDescuento] = useState('');
@@ -19,30 +20,30 @@ const PedidoForm = () => {
   const [anticipo, setAnticipo] = useState('');
   const [pago, setPago] = useState('');
   const [porCobrar, setPorCobrar] = useState(0);
-  const [lugar, setLugar] = useState('');
+  const [lugar, setLugar] = useState(null);
   const [entregado, setEntregado] = useState(false);
   const [comprado, setComprado] = useState(false);
-  const [clientes, setClientes] = useState([]); // Estado para almacenar clientes
-  const [proveedores, setProveedores] = useState([]); // Estado para almacenar proveedores
-  const [lugares, setLugares] = useState([]); // Estado para almacenar lugares
+  const [clientes, setClientes] = useState([]);
+  const [proveedores, setProveedores] = useState([]);
+  const [lugares, setLugares] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchClientes = async () => {
       const clientesSnapshot = await getDocs(collection(db, 'clientes'));
-      const clientesList = clientesSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      const clientesList = clientesSnapshot.docs.map(doc => ({ id: doc.id, nombre: doc.data().nombre }));
       setClientes(clientesList);
     };
 
     const fetchProveedores = async () => {
       const proveedoresSnapshot = await getDocs(collection(db, 'proveedores'));
-      const proveedoresList = proveedoresSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      const proveedoresList = proveedoresSnapshot.docs.map(doc => ({ id: doc.id, nombre: doc.data().nombre }));
       setProveedores(proveedoresList);
     };
 
     const fetchLugares = async () => {
       const lugaresSnapshot = await getDocs(collection(db, 'lugares'));
-      const lugaresList = lugaresSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      const lugaresList = lugaresSnapshot.docs.map(doc => ({ id: doc.id, lugar: doc.data().lugar }));
       setLugares(lugaresList);
     };
 
@@ -66,7 +67,7 @@ const PedidoForm = () => {
 
     const calculatedPorCobrar = (calculatedTotal - anticipoValue - pagoValue).toFixed(2);
     setPorCobrar(calculatedPorCobrar);
-    
+
   }, [precioPublico, descuento, costoProveedor, anticipo, pago]);
 
   const handleSubmit = async (e) => {
@@ -75,11 +76,11 @@ const PedidoForm = () => {
     try {
       await addDoc(collection(db, 'pedidos'), {
         fecha: new Date(fecha),
-        cliente,
+        cliente: cliente ? cliente.label : '',
         prenda,
         talla,
         color,
-        proveedor,
+        proveedor: proveedor ? proveedor.label : '',
         costoProveedor: parseFloat(costoProveedor),
         precioPublico: parseFloat(precioPublico),
         descuento: parseFloat(descuento),
@@ -88,7 +89,7 @@ const PedidoForm = () => {
         anticipo: parseFloat(anticipo),
         pago: parseFloat(pago),
         porCobrar: parseFloat(porCobrar),
-        lugar,
+        lugar: lugar ? lugar.label : '',
         entregado,
         comprado
       });
@@ -97,6 +98,21 @@ const PedidoForm = () => {
       console.error('Error adding document: ', error);
     }
   };
+
+  const clienteOptions = clientes.map(cliente => ({
+    value: cliente.id,
+    label: cliente.nombre
+  }));
+
+  const proveedorOptions = proveedores.map(proveedor => ({
+    value: proveedor.id,
+    label: proveedor.nombre
+  }));
+
+  const lugarOptions = lugares.map(lugar => ({
+    value: lugar.id,
+    label: lugar.lugar
+  }));
 
   return (
     <form className="pedido-form" onSubmit={handleSubmit}>
@@ -109,12 +125,14 @@ const PedidoForm = () => {
 
       <label>
         Cliente:
-        <select value={cliente} onChange={(e) => setCliente(e.target.value)} required>
-          <option value="">Selecciona un cliente</option>
-          {clientes.map(cliente => (
-            <option key={cliente.id} value={cliente.cliente}>{cliente.nombre}</option>
-          ))}
-        </select>
+        <Select
+          value={cliente}
+          onChange={setCliente}
+          options={clienteOptions}
+          placeholder="Selecciona o busca un cliente"
+          classNamePrefix="react-select"
+          isClearable
+        />
       </label>
 
       <label>
@@ -134,12 +152,14 @@ const PedidoForm = () => {
 
       <label>
         Proveedor:
-        <select value={proveedor} onChange={(e) => setProveedor(e.target.value)} required>
-          <option value="">Selecciona un proveedor</option>
-          {proveedores.map(proveedor => (
-            <option key={proveedor.id} value={proveedor.proveedor}>{proveedor.nombre}</option>
-          ))}
-        </select>
+        <Select
+          value={proveedor}
+          onChange={setProveedor}
+          options={proveedorOptions}
+          placeholder="Selecciona o busca un proveedor"
+          classNamePrefix="react-select"
+          isClearable
+        />
       </label>
 
       <label>
@@ -184,12 +204,14 @@ const PedidoForm = () => {
 
       <label>
         Lugar:
-        <select value={lugar} onChange={(e) => setLugar(e.target.value)} required>
-          <option value="">Selecciona un lugar</option>
-          {lugares.map(lugar => (
-            <option key={lugar.id} value={lugar.lugar}>{lugar.lugar}</option>
-          ))}
-        </select>
+        <Select
+          value={lugar}
+          onChange={setLugar}
+          options={lugarOptions}
+          placeholder="Selecciona o busca un lugar"
+          classNamePrefix="react-select"
+          isClearable
+        />
       </label>
 
       <label>

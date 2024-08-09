@@ -1,5 +1,7 @@
 /* Pedidos.css */
 
+
+
 body {
   font-family: 'Arial', sans-serif;
   background-color: #f4f4f9;
@@ -84,4 +86,35 @@ h2 {
 
 .nuevo-pedido-button:hover {
   background-color: #0056b3;
+}
+
+.search-container{
+  
+  box-shadow: none;
+ 
+}
+
+.search-button{
+  width: 5vh;
+  height: 5vh;
+ 
+  box-shadow: none;
+  
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.home-button{
+  width: 5vh;
+  height: 5vh;
+  background-color:#fcbf49;
+  box-shadow: none;
+  
 }

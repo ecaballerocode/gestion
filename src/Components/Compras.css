@@ -102,3 +102,27 @@
     font-weight: bold;
   }
   
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    position: relative;
+
+  }
+  
+  .home-button {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    position: absolute;
+    left: 0;
+  }
+  
+  .header h2 {
+    flex-grow: 1;
+    text-align: center;
+    margin: 0;
+  }

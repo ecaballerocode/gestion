@@ -3,6 +3,8 @@ import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase/config';
 import { useNavigate } from 'react-router-dom';
 import './Inventario.css'; // Asegúrate de tener el archivo de estilos
+import { faHouse} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Inventario = () => {
   const [pedidos, setPedidos] = useState([]);
@@ -50,7 +52,14 @@ const Inventario = () => {
 
   return (
     <div>
-      <h1>Inventario</h1>
+      <div className='header'>
+      <button onClick={() => navigate('/')} className="home-button">
+          <FontAwesomeIcon icon={faHouse} style={{color: "#fcbf49"}}/>
+        </button>
+        <h1>Inventario</h1>
+      
+      </div>
+      
       <div className="totales">
         <span>Total: <br /> ${totalPrecioPublico.toFixed(2)}</span>
         <span>Invertido:<br /> ${totalCostoProveedor.toFixed(2)}</span>

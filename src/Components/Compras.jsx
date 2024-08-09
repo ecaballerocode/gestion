@@ -2,9 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { collection, getDocs, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { db } from '../firebase/config';
 import './Compras.css';
+import { useNavigate } from 'react-router-dom';
+import { faHouse} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Compras = () => {
   const [pedidos, setPedidos] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchPedidos();
@@ -56,7 +60,14 @@ const Compras = () => {
 
   return (
     <div>
-      <h2>Compras Pendientes</h2>
+      <div className='header'>
+      <button onClick={() => navigate('/')} className="home-button">
+          <FontAwesomeIcon icon={faHouse} style={{color: "#fcbf49"}}/>
+        </button>
+        <h2>Compras Pendientes</h2>
+      
+      </div>
+      
       {Object.keys(pedidos).map(proveedor => (
         <div key={proveedor} className="compras-group">
           <div className="proveedor-separator">
