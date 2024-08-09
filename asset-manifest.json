@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/gestion/static/css/main.106aff02.css",
-    "main.js": "/gestion/static/js/main.94fb6462.js",
+    "main.css": "/gestion/static/css/main.7e47dee8.css",
+    "main.js": "/gestion/static/js/main.15192580.js",
     "static/js/453.6f87fe01.chunk.js": "/gestion/static/js/453.6f87fe01.chunk.js",
     "static/media/malimLogoBlanco.png": "/gestion/static/media/malimLogoBlanco.7f4ab169cd74d20d4246.png",
     "index.html": "/gestion/index.html",
-    "main.106aff02.css.map": "/gestion/static/css/main.106aff02.css.map",
-    "main.94fb6462.js.map": "/gestion/static/js/main.94fb6462.js.map",
+    "main.7e47dee8.css.map": "/gestion/static/css/main.7e47dee8.css.map",
+    "main.15192580.js.map": "/gestion/static/js/main.15192580.js.map",
     "453.6f87fe01.chunk.js.map": "/gestion/static/js/453.6f87fe01.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.106aff02.css",
-    "static/js/main.94fb6462.js"
+    "static/css/main.7e47dee8.css",
+    "static/js/main.15192580.js"
   ]
 }
