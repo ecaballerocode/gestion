@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { collection, addDoc, getDocs } from 'firebase/firestore';
+import { doc, getDoc, collection, getDocs, updateDoc } from 'firebase/firestore'; // Asegúrate de que getDocs esté importado
 import { db } from '../firebase/config';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Select from 'react-select';
 import './PedidoForm.css';
 
-const PedidoForm = () => {
-  // Los estados siguen igual
-  const [fecha, setFecha] = useState(new Date().toISOString().slice(0, 16));
+const VenderDesdeInventario = () => {
+  const { id } = useParams(); // Obtén el ID del pedido desde los parámetros de la URL
+  const [fecha, setFecha] = useState('');
   const [cliente, setCliente] = useState(null);
   const [prenda, setPrenda] = useState('');
   const [talla, setTalla] = useState('');
@@ -54,6 +54,44 @@ const PedidoForm = () => {
   }, []);
 
   useEffect(() => {
+    const fetchPedido = async () => {
+      const pedidoDoc = await getDoc(doc(db, 'pedidos', id));
+      if (pedidoDoc.exists()) {
+        const pedidoData = pedidoDoc.data();
+
+        setFecha(new Date(pedidoData.fecha.seconds * 1000).toISOString().slice(0, 16));
+        setCliente({
+          value: pedidoData.cliente,
+          label: clientes.find((c) => c.id === pedidoData.cliente)?.nombre || 'Seleccionar Cliente'
+        });
+        setPrenda(pedidoData.prenda);
+        setTalla(pedidoData.talla);
+        setColor(pedidoData.color);
+        setProveedor({
+          value: pedidoData.proveedor,
+          label: proveedores.find((p) => p.id === pedidoData.proveedor)?.nombre || 'Seleccionar Proveedor'
+        });
+        setCostoProveedor(pedidoData.costoProveedor);
+        setPrecioPublico(pedidoData.precioPublico);
+        setDescuento(pedidoData.descuento);
+        setTotal(pedidoData.total);
+        setGanancia(pedidoData.ganancia);
+        setAnticipo(pedidoData.anticipo);
+        setPago(pedidoData.pago);
+        setPorCobrar(pedidoData.porCobrar);
+        setLugar({
+          value: pedidoData.lugar,
+          label: lugares.find((l) => l.id === pedidoData.lugar)?.lugar || 'Seleccionar Lugar'
+        });
+        setEntregado(pedidoData.entregado);
+        setComprado(pedidoData.comprado);
+      }
+    };
+
+    fetchPedido();
+  }, [id, clientes, proveedores, lugares]);
+
+  useEffect(() => {
     const precio = parseFloat(precioPublico) || 0;
     const desc = parseFloat(descuento) || 0;
     const costo = parseFloat(costoProveedor) || 0;
@@ -74,7 +112,7 @@ const PedidoForm = () => {
     e.preventDefault();
 
     try {
-      await addDoc(collection(db, 'pedidos'), {
+      await updateDoc(doc(db, 'pedidos', id), {
         fecha: new Date(fecha),
         cliente: cliente ? cliente.value : '',
         prenda,
@@ -93,9 +131,9 @@ const PedidoForm = () => {
         entregado,
         comprado
       });
-      navigate('/pedidos');
+      navigate('/inventario');
     } catch (error) {
-      console.error('Error adding document: ', error);
+      console.error('Error updating document: ', error);
     }
   };
 
@@ -116,7 +154,7 @@ const PedidoForm = () => {
 
   return (
     <form className="pedido-form" onSubmit={handleSubmit}>
-      <h2>Crear Nuevo Pedido</h2>
+      <h2>Vender Pedido desde Inventario</h2>
 
       <label>
         Fecha:
@@ -221,9 +259,9 @@ const PedidoForm = () => {
         <input type="checkbox" checked={comprado} onChange={(e) => setComprado(e.target.checked)} />
       </label>
 
-      <button type="submit">Crear Pedido</button>
+      <button type="submit">Guardar cambios</button>
     </form>
   );
 };
 
-export default PedidoForm;
+export default VenderDesdeInventario;

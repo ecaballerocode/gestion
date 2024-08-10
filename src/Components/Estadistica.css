@@ -1,0 +1,53 @@
+/* Estadisticas.css */
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+  }
+  
+  h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .estadisticas {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .estadisticas-categoria {
+    margin-bottom: 20px;
+  }
+  
+  .estadisticas-categoria h3 {
+    color: #333;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .estadistica-item {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .estadistica-item strong {
+    color: #007bff;
+  }
+  
+  .estadistica-item ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .estadistica-item ul li {
+    margin-bottom: 5px;
+  }
+  

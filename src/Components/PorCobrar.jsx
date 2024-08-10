@@ -4,11 +4,12 @@ import { db } from '../firebase/config';
 import { Link } from 'react-router-dom';
 import './PorCobrar.css';
 import { useNavigate } from 'react-router-dom';
-import { faHouse} from '@fortawesome/free-solid-svg-icons';
+import { faHouse } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const PorCobrar = () => {
-  const [pedidos, setPedidos] = useState([]);
+  const [pedidos, setPedidos] = useState({});
+  const [totalPorCobrar, setTotalPorCobrar] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -38,19 +39,23 @@ const PorCobrar = () => {
       return acc;
     }, {});
 
+    // Calcular el total por cobrar global
+    const total = Object.values(groupedByCliente).reduce((sum, cliente) => sum + cliente.totalPorCobrar, 0);
+
     setPedidos(groupedByCliente);
+    setTotalPorCobrar(total);
   };
 
   return (
     <div>
       <div className='header'>
-      <button onClick={() => navigate('/')} className="home-button">
-          <FontAwesomeIcon icon={faHouse} style={{color: "#fcbf49"}}/>
+        <button onClick={() => navigate('/')} className="home-button">
+          <FontAwesomeIcon icon={faHouse} style={{ color: "#fcbf49" }} />
         </button>
         <h2>Por Cobrar</h2>
-      
+        
       </div>
-      
+      <h3>Total por Cobrar: ${totalPorCobrar.toFixed(2)}</h3>
       {Object.keys(pedidos).map(cliente => (
         <div key={cliente} className="porcobrar-group">
           <div className="cliente-separator">
@@ -69,7 +74,7 @@ const PorCobrar = () => {
                     </div>
                     <div className="pedido-row">
                       <p>${Number(pedido.total).toFixed(2)}</p>
-                      <p>Pagado     ${Number(pedido.anticipo + pedido.pago).toFixed(2)}</p>
+                      <p>Pagado ${Number(pedido.anticipo + pedido.pago).toFixed(2)}</p>
                       <p><strong>= ${Number(pedido.porCobrar).toFixed(2)}</strong></p>
                     </div>
                   </div>

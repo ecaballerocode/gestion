@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { doc, getDoc, updateDoc, collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase/config';
 import { useParams, useNavigate } from 'react-router-dom';
+import Select from 'react-select';
 import './PedidoDetalle.css';
 
 const PedidoDetalle = () => {
@@ -28,12 +29,13 @@ const PedidoDetalle = () => {
     comprado: false,
   });
 
+  const [clientes, setClientes] = useState([]);
   const [proveedores, setProveedores] = useState([]);
   const [lugares, setLugares] = useState([]);
 
   const formatDateForInput = (date) => {
     const d = new Date(date);
-    const pad = (n) => n < 10 ? '0' + n : n;
+    const pad = (n) => (n < 10 ? '0' + n : n);
     const yyyy = d.getFullYear();
     const MM = pad(d.getMonth() + 1);
     const dd = pad(d.getDate());
@@ -65,21 +67,29 @@ const PedidoDetalle = () => {
       }
     };
 
+    const fetchClientes = async () => {
+      const clientesCollection = collection(db, 'clientes');
+      const clientesSnapshot = await getDocs(clientesCollection);
+      const clientesList = clientesSnapshot.docs.map(doc => ({ value: doc.id, label: doc.data().nombre }));
+      setClientes(clientesList);
+    };
+
     const fetchProveedores = async () => {
       const proveedoresCollection = collection(db, 'proveedores');
       const proveedoresSnapshot = await getDocs(proveedoresCollection);
-      const proveedoresList = proveedoresSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      const proveedoresList = proveedoresSnapshot.docs.map(doc => ({ value: doc.id, label: doc.data().nombre }));
       setProveedores(proveedoresList);
     };
 
     const fetchLugares = async () => {
       const lugaresCollection = collection(db, 'lugares');
       const lugaresSnapshot = await getDocs(lugaresCollection);
-      const lugaresList = lugaresSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      const lugaresList = lugaresSnapshot.docs.map(doc => ({ value: doc.id, label: doc.data().lugar }));
       setLugares(lugaresList);
     };
 
     fetchPedido();
+    fetchClientes();
     fetchProveedores();
     fetchLugares();
   }, [id]);
@@ -96,6 +106,14 @@ const PedidoDetalle = () => {
       }
       return updatedPedido;
     });
+  };
+
+  const handleSelectChange = (selectedOption, actionMeta) => {
+    const { name } = actionMeta;
+    setPedido((prevPedido) => ({
+      ...prevPedido,
+      [name]: selectedOption ? selectedOption.label : '',
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -124,12 +142,13 @@ const PedidoDetalle = () => {
       </label>
       <label>
         Cliente:
-        <input
-          type="text"
+        <Select
           name="cliente"
-          value={pedido.cliente}
-          onChange={handleInputChange}
-          required
+          options={clientes}
+          onChange={handleSelectChange}
+          value={clientes.find(option => option.label === pedido.cliente)}
+          isClearable
+          placeholder="Seleccionar cliente..."
         />
       </label>
       <label>
@@ -164,17 +183,14 @@ const PedidoDetalle = () => {
       </label>
       <label>
         Proveedor:
-        <select
+        <Select
           name="proveedor"
-          value={pedido.proveedor}
-          onChange={handleInputChange}
-          required
-        >
-          <option value="">Seleccionar</option>
-          {proveedores.map((prov) => (
-            <option key={prov.id} value={prov.nombre}>{prov.nombre}</option>
-          ))}
-        </select>
+          options={proveedores}
+          onChange={handleSelectChange}
+          value={proveedores.find(option => option.label === pedido.proveedor)}
+          isClearable
+          placeholder="Seleccionar proveedor..."
+        />
       </label>
       <label>
         Costo Proveedor:
@@ -255,17 +271,14 @@ const PedidoDetalle = () => {
       </label>
       <label>
         Lugar:
-        <select
+        <Select
           name="lugar"
-          value={pedido.lugar}
-          onChange={handleInputChange}
-          required
-        >
-          <option value="">Seleccionar</option>
-          {lugares.map((lug) => (
-            <option key={lug.id} value={lug.lugar}>{lug.lugar}</option>
-          ))}
-        </select>
+          options={lugares}
+          onChange={handleSelectChange}
+          value={lugares.find(option => option.label === pedido.lugar)}
+          isClearable
+          placeholder="Seleccionar lugar..."
+        />
       </label>
       <label>
         Entregado:
@@ -285,7 +298,7 @@ const PedidoDetalle = () => {
           onChange={(e) => setPedido({ ...pedido, comprado: e.target.checked })}
         />
       </label>
-      <button type="submit">Guardar cambios</button>
+      <button type="submit">Guardar Cambios</button>
     </form>
   );
 };
